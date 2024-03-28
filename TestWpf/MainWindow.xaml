@@ -1,0 +1,24 @@
+﻿<Window x:Class="TestWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{Binding GlobalStrings.StringHello,Mode=OneWay}"/>
+                <TextBlock Name="tb"/>
+                <Rectangle Height="10"/>
+                <ComboBox SelectedItem="{Binding GlobalStrings.CurrentCulture,Mode=TwoWay}" ItemsSource="{Binding GlobalStrings.AllCultures}"/>
+                <Rectangle Height="3"/>
+                <Button Click="Button_Click">Test</Button>
+                <TextBlock Name="logs"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
