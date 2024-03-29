@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EleCho.Internationalization
 {
+
     [Generator(LanguageNames.CSharp)]
     public class StringsGenerator : IIncrementalGenerator
     {
@@ -43,6 +44,8 @@ namespace EleCho.Internationalization
 
                 return strings;
             }
+
+            //static IDictionary<string, string> ReadJsonResource()
         }
 
         private string CorrectString(string str)
@@ -139,11 +142,11 @@ namespace EleCho.Internationalization
 
                         namespace {{{generation.ClassNamespace}}}
                         {
-                            partial class {{{generation.ClassName}}} : INotifyPropertyChanging, INotifyPropertyChanged
+                            partial class {{{generation.ClassName}}} : {{{typeof(II18nStrings).FullName}}}, INotifyPropertyChanging, INotifyPropertyChanged
                             {
-                                class _I18nStrings
+                                class _I18nCultureStrings
                                 {
-                                    public _I18nStrings(CultureInfo culture)
+                                    public _I18nCultureStrings(CultureInfo culture)
                                     {
                                         Culture = culture;
                                     }
@@ -152,12 +155,12 @@ namespace EleCho.Internationalization
                                     public Dictionary<string, string> Strings { get; } = new();
                                 }
 
-                                private List<_I18nStrings> _allI18nStrings = new()
+                                private List<_I18nCultureStrings> _allI18nStrings = new()
                                 {
                         {{{
                                     string.Join(Environment.NewLine, generation.Generations.Select(g =>
                         $$$$"""
-                                    new _I18nStrings(new CultureInfo("{{{{g.Culture}}}}"))
+                                    new _I18nCultureStrings(new CultureInfo("{{{{g.Culture}}}}"))
                                     {
                                         Strings =
                                         {
@@ -262,6 +265,18 @@ namespace EleCho.Internationalization
                                 string.Join(Environment.NewLine, generation.Generations.Select(g =>
                         $$$$"""
                                     new CultureInfo("{{{{g.Culture}}}}"),
+                        """
+                                ))
+                        }}}
+                                }.AsReadOnly();
+                                
+
+                                public IReadOnlyList<string> AllStringNames { get; } = new List<string>()
+                                {             
+                        {{{
+                                string.Join(Environment.NewLine, allStringNames.Select(name =>
+                        $$$$"""
+                                    "{{{{name}}}}",
                         """
                                 ))
                         }}}
