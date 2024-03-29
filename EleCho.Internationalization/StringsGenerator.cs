@@ -245,6 +245,7 @@ namespace EleCho.Internationalization
                         """
                                 ))
                         }}}
+                                        OnPropertyChanging(nameof(CurrentCulture));
 
                                         _currentCulture = value;
                                         _currentCultureStringsIndex = -1;
@@ -256,6 +257,7 @@ namespace EleCho.Internationalization
                         """
                                 ))
                         }}}
+                                        OnPropertyChanged(nameof(CurrentCulture));
                                     }
                                 }
 

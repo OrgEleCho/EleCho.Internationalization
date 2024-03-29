@@ -14,9 +14,19 @@ namespace TestConsole
                 AllowFallback = true,
             };
 
+            app.PropertyChanged += App_PropertyChanged;
             app.CurrentCulture = new CultureInfo("zh-CN");
 
             Console.WriteLine(app.StringHello);
+
+        }
+
+        private static void App_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != nameof(App.CurrentCulture))
+                return;
+
+            Console.WriteLine($"CultureChanged");
         }
     }
 }
