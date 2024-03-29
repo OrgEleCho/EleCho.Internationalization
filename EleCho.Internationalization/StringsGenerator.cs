@@ -139,7 +139,7 @@ namespace EleCho.Internationalization
 
                         namespace {{{generation.ClassNamespace}}}
                         {
-                            partial class {{{generation.ClassName}}} : INotifyPropertyChanged
+                            partial class {{{generation.ClassName}}} : INotifyPropertyChanging, INotifyPropertyChanged
                             {
                                 class _I18nStrings
                                 {
