@@ -2,9 +2,10 @@
 using System.Globalization;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EleCho.Internationalization
+namespace EleCho.Internationalization.SourceGenerators
 {
 
     [Generator(LanguageNames.CSharp)]
@@ -95,6 +96,10 @@ namespace EleCho.Internationalization
                 List<StringsGenerationDeclaration> generations = new();
                 foreach (var attribute in syntaxContext.Attributes)
                 {
+                    if (attribute.AttributeClass?.Name != typeof(GenerateStringsAttribute).Name||
+                        attribute.AttributeClass?.ContainingNamespace?.ToString() != typeof(GenerateStringsAttribute).Namespace)
+                        continue;
+
                     var arguments = attribute.ConstructorArguments
                         .Select(v => v.Value)
                         .ToArray();
@@ -139,6 +144,9 @@ namespace EleCho.Internationalization
                         using System.Collections.Generic;
                         using System.Globalization;
                         using System.ComponentModel;
+                                                
+                        #pragma warning disable
+                        #nullable enable
 
                         namespace {{{generation.ClassNamespace}}}
                         {
@@ -300,18 +308,5 @@ namespace EleCho.Internationalization
 
             });
         }
-    }
-
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class GenerateStringsAttribute : Attribute
-    {
-        public GenerateStringsAttribute(string languageCode, string resourcePath)
-        {
-            LanguageCode = languageCode;
-            ResourcePath = resourcePath;
-        }
-
-        public string LanguageCode { get; }
-        public string ResourcePath { get; }
     }
 }

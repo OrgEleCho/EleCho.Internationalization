@@ -5,30 +5,35 @@
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <IsRoslynComponent>true</IsRoslynComponent>
-    <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Company>EleCho</Company>
     <RepositoryUrl>https://github.com/OrgEleCho/EleCho.Internationalization</RepositoryUrl>
-    <Description>自动生成国际化字符串. 
-Automatically generate internationalized strings.</Description>
-    <PackageTags>i18n</PackageTags>
+    <Description>自动生成国际化字符串. Automatically generate internationalized strings.</Description>
+    <PackageTags>i18n;extension;langauge;binding;SourceGenerator</PackageTags>
+    <PackageIcon>i18n.png</PackageIcon>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
-  </ItemGroup>
-
-  <ItemGroup>
+  <ItemGroup Label="Package">
     <None Update="readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="..\i18n.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\EleCho.Internationalization.SourceGenerators\bin\$(Configuration)\$(TargetFramework)\EleCho.Internationalization.SourceGenerators.dll" PackagePath="analyzers\dotnet\cs" Pack="true" />
+  </ItemGroup>
+
+  <ImportGroup>
+    <Import Project="..\EleCho.Internationalization.Shared\EleCho.Internationalization.Shared.projitems" Label="Shared" />
+  </ImportGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EleCho.Internationalization.SourceGenerators\EleCho.Internationalization.SourceGenerators.csproj"
+                      ReferenceOutputAssembly="False"/>
   </ItemGroup>
 
 </Project>

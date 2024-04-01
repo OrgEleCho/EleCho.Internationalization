@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EleCho.Internationalization\EleCho.Internationalization.csproj" OutputItemType="Analyzer" PrivateAssets="all" />
+    <ProjectReference Include="..\EleCho.Internationalization.SourceGenerators\EleCho.Internationalization.SourceGenerators.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\EleCho.Internationalization\EleCho.Internationalization.csproj" />
   </ItemGroup>
 
 </Project>
