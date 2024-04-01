@@ -138,29 +138,26 @@ namespace EleCho.Internationalization.SourceGenerators
                         .ToArray();
 
                     string source =
-                        $$$"""
-                        using System;
-                        using System.Collections;
-                        using System.Collections.Generic;
-                        using System.Globalization;
-                        using System.ComponentModel;
-                                                
+                        $$$"""                  
                         #pragma warning disable
                         #nullable enable
 
                         namespace {{{generation.ClassNamespace}}}
                         {
-                            partial class {{{generation.ClassName}}} : {{{typeof(II18nStrings).FullName}}}, INotifyPropertyChanging, INotifyPropertyChanged
+                            partial class {{{generation.ClassName}}} : 
+                                global::EleCho.Internationalization.{{{nameof(II18nStrings)}}}, 
+                                global::System.ComponentModel.INotifyPropertyChanging, 
+                                global::System.ComponentModel.INotifyPropertyChanged
                             {
                                 class _I18nCultureStrings
                                 {
-                                    public _I18nCultureStrings(CultureInfo culture)
+                                    public _I18nCultureStrings(global::System.Globalization.CultureInfo culture)
                                     {
                                         Culture = culture;
                                     }
 
-                                    public CultureInfo Culture { get; }
-                                    public Dictionary<string, string> Strings { get; } = new();
+                                    public global::System.Globalization.CultureInfo Culture { get; }
+                                    public global::System.Collections.Generic.Dictionary<string, string> Strings { get; } = new();
                                 }
 
                                 private List<_I18nCultureStrings> _allI18nStrings = new()
@@ -168,7 +165,7 @@ namespace EleCho.Internationalization.SourceGenerators
                         {{{
                                     string.Join(Environment.NewLine, generation.Generations.Select(g =>
                         $$$$"""
-                                    new _I18nCultureStrings(new CultureInfo("{{{{g.Culture}}}}"))
+                                    new _I18nCultureStrings(new global::System.Globalization.CultureInfo("{{{{g.Culture}}}}"))
                                     {
                                         Strings =
                                         {
@@ -187,16 +184,16 @@ namespace EleCho.Internationalization.SourceGenerators
                                 };
 
                                 private int _currentCultureStringsIndex = -1;
-                                private CultureInfo _currentCulture = CultureInfo.CurrentCulture;
+                                private global::System.Globalization.CultureInfo _currentCulture = global::System.Globalization.CultureInfo.CurrentCulture;
 
                                 protected virtual void OnPropertyChanging(string propertyName)
                                 {
-                                    PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+                                    PropertyChanging?.Invoke(this, new global::System.ComponentModel.PropertyChangingEventArgs(propertyName));
                                 }
 
                                 protected virtual void OnPropertyChanged(string propertyName)
                                 {
-                                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                                    PropertyChanged?.Invoke(this, new global::System.ComponentModel.PropertyChangedEventArgs(propertyName));
                                 }
                         
                                 public string GetString(string name)
@@ -230,13 +227,13 @@ namespace EleCho.Internationalization.SourceGenerators
                                     return name;
                                 }
 
-                                public event PropertyChangingEventHandler? PropertyChanging;
-                                public event PropertyChangedEventHandler? PropertyChanged;
+                                public event global::System.ComponentModel.PropertyChangingEventHandler? PropertyChanging;
+                                public event global::System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
 
                                 public bool AllowFuzzyMatching { get; set; } = false;
                                 public bool AllowFallback { get; set; } = false;
 
-                                public CultureInfo CurrentCulture
+                                public global::System.Globalization.CultureInfo CurrentCulture
                                 {
                                     get => _currentCulture;
                                     set
@@ -269,12 +266,12 @@ namespace EleCho.Internationalization.SourceGenerators
                                     }
                                 }
 
-                                public IReadOnlyList<CultureInfo> AllCultures { get; } = new List<CultureInfo>()
+                                public IReadOnlyList<global::System.Globalization.CultureInfo> AllCultures { get; } = new List<global::System.Globalization.CultureInfo>()
                                 {             
                         {{{
                                 string.Join(Environment.NewLine, generation.Generations.Select(g =>
                         $$$$"""
-                                    new CultureInfo("{{{{g.Culture}}}}"),
+                                    new global::System.Globalization.CultureInfo("{{{{g.Culture}}}}"),
                         """
                                 ))
                         }}}
