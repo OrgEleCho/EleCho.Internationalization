@@ -160,7 +160,7 @@ namespace EleCho.Internationalization.SourceGenerators
                                     public global::System.Collections.Generic.Dictionary<string, string> Strings { get; } = new();
                                 }
 
-                                private List<_I18nCultureStrings> _allI18nStrings = new()
+                                private global::System.Collections.Generic.List<_I18nCultureStrings> _allI18nStrings = new()
                                 {
                         {{{
                                     string.Join(Environment.NewLine, generation.Generations.Select(g =>
@@ -239,7 +239,7 @@ namespace EleCho.Internationalization.SourceGenerators
                                     set
                                     {
                                         if (value is null)
-                                            throw new ArgumentNullException(nameof(value));
+                                            throw new global::System.ArgumentNullException(nameof(value));
                                         if (value == _currentCulture)
                                             return;
                                             
@@ -266,7 +266,7 @@ namespace EleCho.Internationalization.SourceGenerators
                                     }
                                 }
 
-                                public IReadOnlyList<global::System.Globalization.CultureInfo> AllCultures { get; } = new List<global::System.Globalization.CultureInfo>()
+                                public global::System.Collections.Generic.IReadOnlyList<global::System.Globalization.CultureInfo> AllCultures { get; } = new global::System.Collections.Generic.List<global::System.Globalization.CultureInfo>()
                                 {             
                         {{{
                                 string.Join(Environment.NewLine, generation.Generations.Select(g =>
@@ -278,7 +278,7 @@ namespace EleCho.Internationalization.SourceGenerators
                                 }.AsReadOnly();
                                 
 
-                                public IReadOnlyList<string> AllStringNames { get; } = new List<string>()
+                                public global::System.Collections.Generic.IReadOnlyList<string> AllStringNames { get; } = new global::System.Collections.Generic.List<string>()
                                 {             
                         {{{
                                 string.Join(Environment.NewLine, allStringNames.Select(name =>

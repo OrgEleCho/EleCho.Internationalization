@@ -7,6 +7,5 @@ namespace TestWpf
     public partial class App : Application
     {
         GlobalStrings gs = new();
-
     }
 }
