@@ -88,7 +88,7 @@ namespace EleCho.Internationalization.SourceGenerators
                     throw new Exception($"Invalid attribute owner, symbol name: {syntaxContext.TargetSymbol.Name}");
 
                 string className = typeSymbol.Name;
-                string classNamespace = typeSymbol.ContainingNamespace?.Name ?? string.Empty;
+                string classNamespace = typeSymbol.ContainingNamespace?.ToString() ?? string.Empty;
 
                 if (string.IsNullOrWhiteSpace(classNamespace))
                     throw new Exception($"Cannot find namespace of symbol, symbol name: {syntaxContext.TargetSymbol.Name}");

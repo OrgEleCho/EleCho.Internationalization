@@ -12,7 +12,7 @@
     <Description>自动生成国际化字符串. Automatically generate internationalized strings.</Description>
     <PackageTags>i18n;extension;langauge;binding;SourceGenerator</PackageTags>
     <PackageIcon>i18n.png</PackageIcon>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup Label="Package">
