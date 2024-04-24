@@ -263,6 +263,11 @@ namespace EleCho.Internationalization.SourceGenerators
                                 ))
                         }}}
                                         OnPropertyChanged(nameof(CurrentCulture));
+
+                                        if (CurrentCultureChanged != null)
+                                        {
+                                            CurrentCultureChanged.Invoke(this, global::System.EventArgs.Empty);
+                                        }
                                     }
                                 }
 
@@ -296,6 +301,8 @@ namespace EleCho.Internationalization.SourceGenerators
                         """
                                 ))
                         }}}
+
+                                public event global::System.EventHandler? CurrentCultureChanged;
                             }
                         }
                         """;

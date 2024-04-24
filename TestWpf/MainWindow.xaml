@@ -10,11 +10,12 @@
     <Grid>
         <ScrollViewer>
             <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-                <TextBlock Text="{Binding GlobalStrings.StringHello,Mode=OneWay}"/>
+                        HorizontalAlignment="Center">
+                <TextBlock Text="{DynamicResource I18nStringHello}"/>
                 <TextBlock Name="tb"/>
                 <Rectangle Height="10"/>
-                <ComboBox SelectedItem="{Binding GlobalStrings.CurrentCulture,Mode=TwoWay}" ItemsSource="{Binding GlobalStrings.AllCultures}"/>
+                <ComboBox SelectedItem="{Binding GlobalStrings.CurrentCulture,Mode=TwoWay}"
+                          ItemsSource="{Binding GlobalStrings.AllCultures}"/>
                 <Rectangle Height="3"/>
                 <Button Click="Button_Click">Test</Button>
                 <TextBlock Name="logs"/>

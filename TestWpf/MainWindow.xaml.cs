@@ -33,24 +33,20 @@ namespace TestWpf
 
         private void GlobalStrings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if (e.PropertyName != nameof(GlobalStrings.StringHello))
+            {
+                return;
+            }
+
             logs.Text += $"{e.PropertyName} Changed, New value: {GlobalStrings.StringHello}{Environment.NewLine}";
         }
 
-        public GlobalStrings GlobalStrings { get; } = new()
-        {
-            AllowFallback = true,
-        };
+        public GlobalStrings GlobalStrings { get; } = App.GlobalStrings;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.GlobalStrings.CurrentCulture = new CultureInfo("zh-CN");
             tb.Text = GlobalStrings.StringHello;
         }
-    }
-
-    public class I18nStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

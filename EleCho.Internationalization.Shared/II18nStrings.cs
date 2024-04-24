@@ -9,5 +9,7 @@ namespace EleCho.Internationalization
 
         public string GetString(string name);
         public IReadOnlyList<string> AllStringNames { get; }
+
+        public event EventHandler? CurrentCultureChanged;
     }
 }
